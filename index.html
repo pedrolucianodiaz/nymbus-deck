@@ -68,10 +68,14 @@
     font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;
     font-size:10.6cqh;line-height:1.02;letter-spacing:-1px;color:var(--title-navy)}
   .cover-title .hl{color:var(--evolve)}
-  .cover-meta{position:absolute;left:4.7%;top:78.2%;z-index:20;
+  .cover .cover-meta{position:absolute;left:4.7%;top:78.2%;z-index:20;
+    display:flex;flex-direction:row;align-items:flex-start;gap:2.6cqh;
     font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:var(--title-navy);line-height:1.42}
   .cover-meta .p{font-weight:700;font-size:3.1cqh}
   .cover-meta .t,.cover-meta .d{font-weight:400;font-size:2.9cqh;color:#3a558f}
+  .cover-qr{flex-shrink:0;height:12.4cqh;width:12.4cqh;display:block;border-radius:.6cqh;
+    background:#fff;padding:.5cqh;box-shadow:0 .4cqh 1.2cqh rgba(0,39,117,.18)}
+  .cover-meta-text{display:flex;flex-direction:column;justify-content:center}
 
   /* ============ SLIDE 2 · FORWARD-LOOKING STATEMENTS (fiel a slide2.pptx) ============ */
   #s2{padding:0;background:#CFE9FE}
@@ -265,9 +269,47 @@
   .dot.active{background:var(--sf-blue);width:26px;border-radius:5px}
   .track{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#0176D3,#00A1E0);z-index:50;transition:width .5s ease}
   .footer-brand{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:40;font-size:12px;color:#7d9ac0;font-weight:600;letter-spacing:1px}
+
+  /* ============================================================
+     VISTA MOVIL (celular en vertical) — NO afecta el diseno de PC.
+     Solo se activa en pantallas angostas y en orientacion vertical.
+     Convierte el carrusel horizontal en un scroll vertical de
+     slides apilados (cada uno 16:9 a todo el ancho). Pellizca=zoom.
+     ============================================================ */
+  .mobile-hint{display:none}
+  @media (orientation:portrait) and (max-width:920px){
+    html,body{height:auto!important;overflow-x:hidden!important;overflow-y:auto!important;
+      -webkit-text-size-adjust:100%}
+    .deck{position:relative!important;height:auto!important;width:100%!important;
+      padding:calc(env(safe-area-inset-top,0px) + 46px) 0 34px 0!important}
+    /* cada slide: caja 16:9 a todo el ancho, apilada verticalmente */
+    .slide{position:relative!important;inset:auto!important;
+      width:100vw!important;height:56.25vw!important;display:block!important;
+      opacity:1!important;visibility:visible!important;transform:none!important;
+      margin:0 0 12px 0!important;overflow:hidden!important;
+      transition:none!important}
+    .slide.prev{transform:none!important}
+    /* piezas de slides 3 y 4 que arrancan invisibles: llevarlas a su estado de reposo */
+    #s3 .s3-card,#s4 .s4-now,#s4 .s4-future{opacity:1!important;transform:translateX(0)!important;animation:none!important}
+    #s3 .s3-chip,#s4 .s4-arrow{opacity:1!important;transform:translateX(-50%)!important;animation:none!important}
+    /* ocultar la navegacion pensada para escritorio */
+    .nav,.progress-wrap,.footer-brand,.track{display:none!important}
+    /* fondo fijo detras del scroll */
+    .bg-mesh,#net{position:fixed!important}
+    /* barrita de ayuda arriba */
+    .mobile-hint{display:flex!important}
+  }
+  .mobile-hint{position:fixed;top:0;left:0;right:0;z-index:60;
+    align-items:center;justify-content:center;gap:7px;
+    padding:calc(env(safe-area-inset-top,0px) + 7px) 12px 7px 12px;
+    background:rgba(0,39,117,.94);color:#fff;
+    font-family:'Inter','Segoe UI',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.3px;
+    box-shadow:0 2px 12px rgba(0,39,117,.4)}
 </style>
 </head>
 <body>
+
+<div class="mobile-hint"><i class="fa-solid fa-arrows-up-down"></i> Deslizá para ver los slides · pellizcá para hacer zoom</div>
 
 <div class="bg-mesh"></div>
 <canvas id="net"></canvas>
@@ -302,9 +344,12 @@
       <img class="cl cl-cy4" data-depth="26" data-rot="10.7"  src="Nymbus-MC-Agosto_assets/image4.png"  alt="">
       <div class="cover-title cl" data-depth="6">Marketing que<br><span class="hl">evoluciona</span><br>con cada cliente</div>
       <div class="cover-meta cl" data-depth="6">
-        <div class="p">Luciano Diaz</div>
-        <div class="t">Solution Engineer</div>
-        <div class="d">Viernes 28 de agosto de 2026</div>
+        <img class="cover-qr" src="Nymbus-MC-Agosto_assets/nymbus-deck-qr.png" alt="QR del deck">
+        <div class="cover-meta-text">
+          <div class="p">Luciano Diaz</div>
+          <div class="t">Solution Engineer</div>
+          <div class="d">Viernes 28 de agosto de 2026</div>
+        </div>
       </div>
     </div>
   </section>
