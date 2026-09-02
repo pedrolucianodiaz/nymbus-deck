@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nymbus × Salesforce — Marketing Cloud · Agosto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --sf-blue:#0176D3; --sf-cyan:#00A1E0; --sky:#1B96FF; --evolve:#0250D9;
+    --navy:#032D60; --navy-deep:#001639; --slate:#54698D; --title-navy:#0A2A6B;
+    --cloud:#EEF4FF; --cloud-2:#F5F9FF; --white:#FFFFFF; --line:#D8E6F6;
+    --shadow:0 18px 48px rgba(3,45,96,.10); --shadow-sm:0 8px 24px rgba(3,45,96,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden}
+  body{font-family:'Inter','Segoe UI',sans-serif;background:#dbecff;color:var(--navy);-webkit-font-smoothing:antialiased}
+  .bg-mesh{position:fixed;inset:0;z-index:0;
+    background:radial-gradient(closest-side at 12% 18%, rgba(27,150,255,.18), transparent 70%),
+      radial-gradient(closest-side at 88% 82%, rgba(0,161,224,.16), transparent 70%),
+      linear-gradient(180deg,#f5f9ff,#eaf3ff);}
+  #net{position:fixed;inset:0;z-index:0;opacity:.5}
+  .deck{position:relative;z-index:2;height:100vh;width:100vw}
+
+  /* ===== PARALLAX CAROUSEL TRANSITION ===== */
+  .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+    opacity:0;visibility:hidden;overflow:hidden;
+    transform:translateX(60px) scale(.985);
+    transition:opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1), visibility .6s}
+  .slide.active{opacity:1;visibility:visible;transform:translateX(0) scale(1)}
+  .slide.prev{transform:translateX(-60px) scale(.985)}
+
+  /* ============ COVER (block 1 — faithful to slide1.pdf) ============ */
+  #s1{padding:0;background:linear-gradient(135deg,#eaf4ff 0%,#d3e7ff 55%,#bcd9ff 100%)}
+  .cover{position:absolute;inset:0;margin:auto;aspect-ratio:16/9;max-width:100%;max-height:100%;
+    container-type:size;overflow:hidden}
+  .cover .cl{position:absolute;display:block;opacity:0;will-change:transform,opacity}
+  .cover img.cl{object-fit:fill}
+  /* asset layers — left/top/width/height are % of the 16:9 stage (exact from source) */
+  .cl-bg   {left:-0.02%;top:0.23%;width:99.99%;height:100%;z-index:1}
+  .cl-85   {left:26.71%;top:0;width:73.29%;height:100%;z-index:2}
+  .cl-87   {left:0;top:0;width:67.50%;height:72.99%;z-index:3}
+  .cl-86   {left:69.31%;top:0;width:30.70%;height:100%;z-index:4}
+  .cl-88   {left:45.78%;top:0;width:37.97%;height:63.29%;z-index:5}
+  .cl-mag  {left:33.81%;top:71.85%;width:44.95%;height:28.15%;z-index:6}
+  .cl-79   {left:5.00%;top:35.82%;width:33.12%;height:5.70%;z-index:3;opacity:.9}
+  .cl-sp1  {left:49.69%;top:39.42%;width:2.21%;height:3.53%;z-index:8}
+  .cl-sp2  {left:72.89%;top:3.13%;width:2.14%;height:3.41%;z-index:8}
+  .cl-sp3  {left:43.22%;top:78.99%;width:1.74%;height:2.77%;z-index:8}
+  .cl-sp4  {left:57.84%;top:68.71%;width:1.26%;height:2.01%;z-index:8}
+  .cl-robot{left:61.96%;top:28.79%;width:29.20%;height:51.91%;z-index:10;
+    filter:drop-shadow(0 26px 34px rgba(3,45,96,.28))}
+  .cl-pk1  {left:60.02%;top:38.31%;width:3.18%;height:5.75%;z-index:11;transform:rotate(5.6deg)}
+  .cl-cy1  {left:91.90%;top:48.88%;width:1.84%;height:3.31%;z-index:11;transform:rotate(4deg)}
+  .cl-pk2  {left:88.43%;top:54.13%;width:3.51%;height:6.33%;z-index:11;transform:rotate(-17.4deg)}
+  .cl-pk3  {left:89.79%;top:41.99%;width:1.24%;height:2.24%;z-index:11}
+  .cl-cy2  {left:63.88%;top:31.35%;width:2.28%;height:4.10%;z-index:11;transform:rotate(12.1deg)}
+  .cl-pk4  {left:61.66%;top:55.40%;width:3.18%;height:5.75%;z-index:11;transform:rotate(5.6deg)}
+  .cl-cy3  {left:65.52%;top:48.45%;width:2.28%;height:4.10%;z-index:11;transform:rotate(12.1deg)}
+  .cl-or1  {left:82.91%;top:17.21%;width:3.21%;height:5.79%;z-index:12;transform:rotate(-6.3deg)}
+  .cl-ylw  {left:84.56%;top:19.68%;width:11.25%;height:20.12%;z-index:12;transform:rotate(7.8deg)}
+  .cl-cy4  {left:80.57%;top:23.90%;width:1.84%;height:3.31%;z-index:12;transform:rotate(10.7deg)}
+  /* cover text */
+  .cover-title{position:absolute;left:4.2%;top:29.4%;width:56%;z-index:20;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;
+    font-size:10.6cqh;line-height:1.02;letter-spacing:-1px;color:var(--title-navy)}
+  .cover-title .hl{color:var(--evolve)}
+  .cover-meta{position:absolute;left:4.7%;top:78.2%;z-index:20;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:var(--title-navy);line-height:1.42}
+  .cover-meta .p{font-weight:700;font-size:3.1cqh}
+  .cover-meta .t,.cover-meta .d{font-weight:400;font-size:2.9cqh;color:#3a558f}
+
+  /* ============ SLIDE 2 · FORWARD-LOOKING STATEMENTS (fiel a slide2.pptx) ============ */
+  #s2{padding:0;background:#CFE9FE}
+  .fls{position:absolute;inset:0;margin:auto;aspect-ratio:16/9;max-width:100%;max-height:100%;
+    container-type:size;overflow:hidden;background:#CFE9FE}
+  .fls-title{position:absolute;left:4.73%;top:8.40%;width:82.82%;z-index:3;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;
+    font-size:6.67cqh;line-height:.9;letter-spacing:-.5px;color:#002775}
+  .fls-card{position:absolute;left:4.69%;top:26.84%;width:90.42%;height:60.82%;z-index:1;
+    background:#fff;border-radius:1.4cqh;box-shadow:0 12px 40px rgba(3,45,96,.06)}
+  .fls-body{position:absolute;left:7.34%;top:31.89%;width:84.82%;z-index:2;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;
+    font-size:2.72cqh;line-height:1.2;color:#011962;text-align:left}
+  .fls-logo{position:absolute;left:90.49%;top:8.24%;width:5.21%;height:6.49%;z-index:3;
+    object-fit:contain;display:block}
+
+  /* ============ SLIDE 3 · WHILE CMOs JOBS-TO-BE-DONE (fiel a slide3.pptx) ============ */
+  #s3{padding:0;background:#dbeafe}
+  .s3{position:absolute;inset:0;margin:auto;aspect-ratio:16/9;max-width:100%;max-height:100%;
+    container-type:size;overflow:hidden}
+  .s3-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .s3-logo{position:absolute;top:3.5%;left:50%;transform:translateX(-50%);height:12.65cqh;
+    z-index:3;object-fit:contain}
+  .s3-title{position:absolute;top:16.5%;left:0;width:100%;z-index:3;text-align:center;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;
+    font-size:7.4cqh;line-height:.98;letter-spacing:-.5px;color:#002775}
+  .s3-title .s3-hl{display:block;margin-top:.6cqh;color:#0250D9;font-size:4.2cqh;
+    letter-spacing:0}
+  .s3-chip{position:absolute;top:40.9%;width:11cqh;height:11cqh;z-index:2;transform:translateX(-50%);
+    background:rgba(255,255,255,.9);border-radius:50%;
+    box-shadow:0 14px 42px rgba(54,91,155,.32);display:grid;place-items:center}
+  .s3-chip img{width:74%;height:74%;object-fit:contain}
+  .s3-card{position:absolute;top:50.5%;height:12.2%;z-index:2;
+    background:rgba(255,255,255,.5);border-radius:1.8cqh;
+    box-shadow:0 12px 40px rgba(54,91,155,.28);
+    display:grid;place-items:center;text-align:center;padding:0 1.6cqh;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:600;
+    font-size:2.5cqh;line-height:1.14;color:#032D60}
+  /* fundido de entrada de las tarjetas, escalonado izq->der (al activar la slide) */
+  #s3 .s3-card{opacity:0;transform:translateX(-26px)}
+  #s3.active .s3-card{animation:s3cardIn .55s cubic-bezier(.4,0,.2,1) both}
+  @keyframes s3cardIn{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:translateX(0)}}
+  #s3 .s3-chip{opacity:0}
+  #s3.active .s3-chip{animation:s3chipIn .55s cubic-bezier(.4,0,.2,1) both}
+  @keyframes s3chipIn{from{opacity:0;transform:translateX(calc(-50% - 26px))}to{opacity:1;transform:translateX(-50%)}}
+  .s3-arrow{position:absolute;top:64%;z-index:2;transform:translateX(-50%);
+    color:#C23934;font-size:2.6cqh;opacity:.9;line-height:1}
+  .s3-pain{position:absolute;top:68.4%;z-index:2;text-align:center;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+  .s3-pain .pn{display:block;font-weight:700;color:#C23934;font-size:2cqh;
+    letter-spacing:.2px;margin-bottom:.5cqh}
+  .s3-pain .pd{display:block;font-weight:400;color:#3a558f;font-size:1.75cqh;line-height:1.24}
+  /* estrellitas blancas de fondo (fiel al slide original) */
+  .s3-stars{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+  .s3-star{position:absolute;background:#fff;border-radius:50%;
+    box-shadow:0 0 4px 1px rgba(255,255,255,.95), 0 0 7px 2px rgba(80,140,220,.55);
+    animation:s3twinkle var(--tw,3s) ease-in-out infinite,
+              s3drift var(--df,6s) ease-in-out infinite alternate}
+  @keyframes s3twinkle{0%,100%{opacity:.4}50%{opacity:1}}
+  @keyframes s3drift{0%{transform:translate(0,51px)}100%{transform:translate(var(--dx,0px),-51px)}}
+
+  /* ============ SLIDE 4 · ESTADO ACTUAL -> FUTURO (base slide 3 + filas de slide4.pptx) ============ */
+  #s4{padding:0;background:#dbeafe}
+  .s4-now{position:absolute;z-index:2;top:64%;height:8.6%;
+    background:#EFEFEF;border-radius:1.2cqh;
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
+    display:grid;place-items:center;text-align:center;padding:0 1.1cqh;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:600;
+    font-size:1.85cqh;line-height:1.12;color:#999999}
+  .s4-arrow{position:absolute;z-index:3;top:70%;transform:translateX(-50%);
+    height:9cqh;width:auto;object-fit:contain}
+  .s4-future{position:absolute;z-index:2;top:77%;height:19%;
+    background:radial-gradient(circle at 100% 50%,#173DC5 0%,#4794F8 100%);border-radius:1.4cqh;
+    box-shadow:0 14px 40px rgba(23,61,197,.34);
+    display:grid;place-items:center;text-align:center;padding:0 1.3cqh;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;
+    font-size:2.05cqh;line-height:1.16;color:#fff}
+  #s4 .s4-now, #s4 .s4-future{opacity:0;transform:translateX(-26px)}
+  #s4.active .s4-now, #s4.active .s4-future{animation:s3cardIn .55s cubic-bezier(.4,0,.2,1) both}
+  #s4 .s4-arrow{opacity:0}
+  #s4.active .s4-arrow{animation:s3chipIn .55s cubic-bezier(.4,0,.2,1) both}
+
+  /* ============ SLIDE · MUCHAS GRACIAS (fiel a slide-gracias.pptx) ============ */
+  #sg{padding:0;background:#fff}
+  .sg{position:absolute;inset:0;margin:auto;aspect-ratio:16/9;max-width:100%;max-height:100%;
+    container-type:size;overflow:hidden;background:#fff}
+  .sg-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  /* parche blanco que oculta el logo "salesforce design" incrustado en el GIF */
+  .sg-cover{position:absolute;left:3.6%;top:20.5%;width:14.4%;height:9.5%;z-index:1;background:#fff}
+  .sg-logo{position:absolute;left:13.76%;top:20.12%;width:8.35%;z-index:2;object-fit:contain}
+  .sg-title{position:absolute;left:4.30%;top:33.20%;width:35.83%;height:34.59%;z-index:2;
+    display:flex;flex-direction:column;justify-content:center;text-align:left;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;
+    font-size:12.6cqh;line-height:1.0;letter-spacing:-.5px;color:#002775}
+
+  /* ============ SLIDE · AGENDA (fiel a slide-agenda.pptx) ============ */
+  #sa{padding:0;background:#002D61}
+  .sa{position:absolute;inset:0;margin:auto;aspect-ratio:16/9;max-width:100%;max-height:100%;
+    container-type:size;overflow:hidden;background:#002D61}
+  .sa-cloud{position:absolute;z-index:1;object-fit:fill}
+  .sa-foliage{position:absolute;left:68.56%;top:87.77%;width:31.44%;height:12.49%;z-index:2;object-fit:fill}
+  .sa-logo{position:absolute;left:92.60%;top:8.22%;width:3.57%;z-index:3;object-fit:contain}
+  .sa-title{position:absolute;left:5%;top:44%;width:24.67%;height:10.65%;z-index:3;
+    display:flex;align-items:center;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;
+    font-size:9.26cqh;line-height:1;letter-spacing:-.5px;color:#fff}
+  .sa-num{position:absolute;z-index:3;width:6.46%;height:10.37%;display:flex;align-items:flex-start;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;
+    font-size:8.4cqh;line-height:1;color:#079AE9}
+  .sa-item{position:absolute;z-index:3;display:flex;flex-direction:column;text-align:left;color:#fff}
+  .sa-item .t{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;
+    font-size:3.33cqh;line-height:1.16}
+  .sa-item .s{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;
+    font-size:2.22cqh;line-height:1.16}
+
+  /* ============ SLIDE · LO QUE ESCUCHAMOS (fiel a slide-loqueescuchamos.pptx) ============ */
+  #sl{padding:0;background:#079AE9}
+  .sl{position:absolute;inset:0;margin:auto;aspect-ratio:16/9;max-width:100%;max-height:100%;
+    container-type:size;overflow:hidden;background:#079AE9}
+  .sl-cloud{position:absolute;z-index:1;object-fit:fill}
+  .sl-sflogo{position:absolute;left:92.60%;top:8.22%;width:3.57%;z-index:1;object-fit:contain}
+  .sl-glass{position:absolute;left:16.48%;top:18.33%;width:67.05%;height:69.44%;z-index:2;
+    border-radius:4cqh;background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.45);
+    box-shadow:0 24px 70px rgba(0,40,100,.20),inset 0 1px 0 rgba(255,255,255,.35);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .sl-logobox{position:absolute;left:83.5%;top:5.2%;width:15.6%;height:11.2%;z-index:1;
+    border-radius:3cqh;background:#fff;
+    box-shadow:0 10px 30px rgba(0,40,100,.15)}
+  .sl-astro{position:absolute;left:36.57%;top:11.67%;width:31.95%;height:54.03%;z-index:3;object-fit:contain}
+  .sl-shadow{position:absolute;left:34.89%;top:68.98%;width:30.23%;height:5.19%;z-index:4;object-fit:fill}
+  .sl-title{position:absolute;left:16.48%;top:56.02%;width:67.05%;height:29.12%;z-index:5;
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;
+    font-size:10.12cqh;line-height:1;letter-spacing:-.5px;color:#fff}
+  .sl-plant{position:absolute;left:32.48%;top:71.37%;width:33.58%;height:28.82%;z-index:6;object-fit:contain}
+  .sl-nymbus{position:absolute;left:85.63%;top:7.31%;width:4.99%;height:5.99%;z-index:7;object-fit:contain}
+
+  /* ============ SLIDE · VIDEO (base del slide 6, sin animaciones/nubes/cuadro) ============ */
+  #sv{padding:0;background:#079AE9}
+  .sv{position:absolute;inset:0;margin:auto;aspect-ratio:16/9;max-width:100%;max-height:100%;
+    container-type:size;overflow:hidden;background:#079AE9}
+  .sv-logobox{position:absolute;left:83.5%;top:5.2%;width:15.6%;height:11.2%;z-index:1;
+    border-radius:3cqh;background:#fff;box-shadow:0 10px 30px rgba(0,40,100,.15)}
+  .sv-sflogo{position:absolute;left:92.60%;top:8.22%;width:3.57%;z-index:2;object-fit:contain}
+  .sv-nymbus{position:absolute;left:85.63%;top:7.31%;width:4.99%;height:5.99%;z-index:2;object-fit:contain}
+  .sv-video{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:64%;aspect-ratio:16/9;object-fit:cover;background:#000;border-radius:2cqh;z-index:1;
+    box-shadow:0 24px 70px rgba(0,40,100,.25)}
+
+  /* ============ SLIDE · CONECTAR / SALESFORCE #1 (fiel a slide-conectar.pptx) ============ */
+  #sc{padding:0;background:#90D0FE}
+  .sc{position:absolute;inset:0;margin:auto;aspect-ratio:16/9;max-width:100%;max-height:100%;
+    container-type:size;overflow:hidden;background:#90D0FE;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+  /* decoraciones */
+  .sc-logo{position:absolute;left:4.14%;top:8.25%;width:5.21%;z-index:5;object-fit:contain}
+  .sc-woman{position:absolute;left:81.49%;top:13.05%;width:18.51%;height:81.60%;z-index:4;object-fit:contain}
+  .sc-astro{position:absolute;left:76.76%;top:59.57%;width:17.48%;height:37.67%;z-index:6;object-fit:contain}
+  .sc-foliage{position:absolute;left:33.49%;top:72.68%;width:16.50%;height:13.95%;z-index:3;object-fit:contain}
+  .sc-bush{position:absolute;left:2.34%;top:83.21%;width:13.15%;height:10.18%;z-index:3;object-fit:contain}
+  /* panel izquierdo */
+  .sc-eyebrow{position:absolute;left:4.14%;top:21.90%;width:16.2%;height:4.85%;z-index:6;
+    background:#032D60;color:#fff;display:flex;align-items:center;padding:0 1.4cqh;box-sizing:border-box;
+    font-weight:600;font-size:1.9cqh;letter-spacing:.2px;white-space:nowrap}
+  .sc-headline{position:absolute;left:4.06%;top:30.14%;width:16.2%;z-index:6;
+    color:#002775;font-weight:800;font-size:4.7cqh;line-height:1.08;letter-spacing:-.5px}
+  /* tarjeta central */
+  .sc-frame{position:absolute;left:29.9%;top:21.2%;width:40.22%;height:58.47%;z-index:5;
+    background:#EAF5FE;border-radius:3cqh;overflow:hidden;box-shadow:0 24px 60px rgba(0,40,100,.18)}
+  /* variantes (carrusel interno) = imagenes que se van pasando */
+  .sc-var{position:absolute;inset:0;opacity:0;animation:scVarFade 16s infinite;animation-fill-mode:both}
+  .sc-cardimg{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
+  @keyframes scVarFade{0%{opacity:0}1.5%{opacity:1}23%{opacity:1}25%{opacity:0}100%{opacity:0}}
+  /* dots del carrusel interno */
+  .sc-dots{position:absolute;left:0;right:0;bottom:16.5%;display:flex;justify-content:center;gap:1.1cqh;z-index:6}
+  .sc-dot{width:1.2cqh;height:1.2cqh;border-radius:50%;background:#c3d6ec;animation:scDot 16s infinite}
+  @keyframes scDot{0%{background:#c3d6ec}1.5%{background:#002775}23%{background:#002775}25%{background:#c3d6ec}100%{background:#c3d6ec}}
+
+  /* nav */
+  .nav{position:fixed;bottom:24px;right:34px;z-index:40;display:flex;gap:12px}
+  .nav button{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--sf-blue);
+    font-size:17px;cursor:pointer;transition:all .25s;display:grid;place-items:center;box-shadow:var(--shadow-sm)}
+  .nav button:hover:not(:disabled){background:var(--sf-blue);color:#fff;border-color:var(--sf-blue);transform:scale(1.08)}
+  .nav button:disabled{opacity:.35;cursor:not-allowed}
+  .progress-wrap{position:fixed;bottom:28px;left:34px;z-index:40;display:flex;align-items:center;gap:16px}
+  .prog-count{font-size:13px;color:var(--slate);font-weight:600;font-variant-numeric:tabular-nums}
+  .prog-count b{color:var(--sf-blue);font-size:16px}
+  .dots{display:flex;gap:7px}
+  .dot{width:8px;height:8px;border-radius:50%;background:#c3d6ec;cursor:pointer;transition:all .3s}
+  .dot.active{background:var(--sf-blue);width:26px;border-radius:5px}
+  .track{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#0176D3,#00A1E0);z-index:50;transition:width .5s ease}
+  .footer-brand{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:40;font-size:12px;color:#7d9ac0;font-weight:600;letter-spacing:1px}
+</style>
+</head>
+<body>
+
+<div class="bg-mesh"></div>
+<canvas id="net"></canvas>
+<div class="track" id="track"></div>
+
+<div class="deck" id="deck">
+
+  <!-- ============ 1 · COVER (fiel a slide1.pdf) ============ -->
+  <section class="slide active" id="s1">
+    <div class="cover" id="cover">
+      <img class="cl cl-bg"  data-depth="0"  src="Nymbus-MC-Agosto_assets/image91.png" alt="">
+      <img class="cl cl-85"  data-depth="3"  src="Nymbus-MC-Agosto_assets/image85.png" alt="">
+      <img class="cl cl-87"  data-depth="3"  src="Nymbus-MC-Agosto_assets/image87.png" alt="">
+      <img class="cl cl-86"  data-depth="4"  src="Nymbus-MC-Agosto_assets/image86.png" alt="">
+      <img class="cl cl-88"  data-depth="7"  src="Nymbus-MC-Agosto_assets/image88.png" alt="">
+      <img class="cl cl-mag" data-depth="9"  src="Nymbus-MC-Agosto_assets/image82.png" alt="">
+      <img class="cl cl-79"  data-depth="2"  src="Nymbus-MC-Agosto_assets/image79.png" alt="">
+      <img class="cl cl-sp1" data-depth="16" src="Nymbus-MC-Agosto_assets/image71.png" alt="">
+      <img class="cl cl-sp2" data-depth="16" src="Nymbus-MC-Agosto_assets/image70.png" alt="">
+      <img class="cl cl-sp3" data-depth="16" src="Nymbus-MC-Agosto_assets/image74.png" alt="">
+      <img class="cl cl-sp4" data-depth="16" src="Nymbus-MC-Agosto_assets/image73.png" alt="">
+      <img class="cl cl-robot" data-depth="20" src="Nymbus-MC-Agosto_assets/image89.png" alt="Robot Salesforce">
+      <img class="cl cl-pk1" data-depth="22" data-rot="5.6"   src="Nymbus-MC-Agosto_assets/image14.png" alt="">
+      <img class="cl cl-cy1" data-depth="26" data-rot="4"     src="Nymbus-MC-Agosto_assets/image4.png"  alt="">
+      <img class="cl cl-pk2" data-depth="22" data-rot="-17.4" src="Nymbus-MC-Agosto_assets/image14.png" alt="">
+      <img class="cl cl-pk3" data-depth="22" data-rot="0"     src="Nymbus-MC-Agosto_assets/image14.png" alt="">
+      <img class="cl cl-cy2" data-depth="26" data-rot="12.1"  src="Nymbus-MC-Agosto_assets/image4.png"  alt="">
+      <img class="cl cl-pk4" data-depth="22" data-rot="5.6"   src="Nymbus-MC-Agosto_assets/image14.png" alt="">
+      <img class="cl cl-cy3" data-depth="26" data-rot="12.1"  src="Nymbus-MC-Agosto_assets/image4.png"  alt="">
+      <img class="cl cl-or1" data-depth="24" data-rot="-6.3"  src="Nymbus-MC-Agosto_assets/image77.png" alt="">
+      <img class="cl cl-ylw" data-depth="18" data-rot="7.8"   src="Nymbus-MC-Agosto_assets/image76.png" alt="">
+      <img class="cl cl-cy4" data-depth="26" data-rot="10.7"  src="Nymbus-MC-Agosto_assets/image4.png"  alt="">
+      <div class="cover-title cl" data-depth="6">Marketing que<br><span class="hl">evoluciona</span><br>con cada cliente</div>
+      <div class="cover-meta cl" data-depth="6">
+        <div class="p">Luciano Diaz</div>
+        <div class="t">Solution Engineer</div>
+        <div class="d">Viernes 28 de agosto de 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2 · MUCHAS GRACIAS (fiel a slide-gracias.pptx) ============ -->
+  <section class="slide" id="sg">
+    <div class="sg">
+      <img class="sg-bg" src="Nymbus-MC-Agosto_assets/gracias-anim.gif" alt="">
+      <div class="sg-cover"></div>
+      <img class="sg-logo" src="Nymbus-MC-Agosto_assets/gracias-sf-logo.png" alt="Salesforce">
+      <div class="sg-title">Muchas<br>Gracias.</div>
+    </div>
+  </section>
+
+  <!-- ============ 3 · AGENDA (fiel a slide-agenda.pptx) ============ -->
+  <section class="slide" id="sa">
+    <div class="sa">
+      <!-- nubes de fondo -->
+      <img class="sa-cloud" src="Nymbus-MC-Agosto_assets/agenda-cloud.png" alt="" style="left:54%;top:52%;width:46%;height:48%;opacity:.2">
+      <img class="sa-cloud" src="Nymbus-MC-Agosto_assets/agenda-cloud.png" alt="" style="left:0;top:74%;width:24%;height:26%;opacity:.2">
+      <img class="sa-cloud" src="Nymbus-MC-Agosto_assets/agenda-cloud.png" alt="" style="left:87.55%;top:84.72%;width:12.45%;height:15.28%">
+      <!-- footer animado (follaje) -->
+      <img class="sa-foliage" src="Nymbus-MC-Agosto_assets/agenda-foliage.gif" alt="">
+      <!-- logo Salesforce -->
+      <img class="sa-logo" src="Nymbus-MC-Agosto_assets/agenda-sf-logo.png" alt="Salesforce">
+      <!-- titulo -->
+      <div class="sa-title">Agenda</div>
+      <!-- columna izquierda -->
+      <div class="sa-num"  style="left:32.86%;top:28.98%">01</div>
+      <div class="sa-item" style="left:40.05%;top:30.51%;width:18.75%"><span class="t">&iquest;Qui&eacute;nes Somos?</span><span class="s">Equipo</span></div>
+      <div class="sa-num"  style="left:32.86%;top:43.74%">02</div>
+      <div class="sa-item" style="left:40.05%;top:45.27%;width:23.22%"><span class="t">&iquest;Por qu&eacute; Salesforce?</span><span class="s">Overview</span></div>
+      <div class="sa-num"  style="left:32.86%;top:57.96%">03</div>
+      <div class="sa-item" style="left:40.05%;top:59.49%;width:18.75%"><span class="t">Visi&oacute;n Ag&eacute;ntica</span><span class="s">Nuestra Estrategia</span></div>
+      <!-- columna derecha -->
+      <div class="sa-num"  style="left:66.20%;top:28.98%">04</div>
+      <div class="sa-item" style="left:74.64%;top:32.73%;width:21.46%"><span class="t">Nuestros Diferenciales</span><span class="s">Marketing, Loyalty</span></div>
+      <div class="sa-num"  style="left:66.33%;top:43.20%">05</div>
+      <div class="sa-item" style="left:73.82%;top:43.96%;width:21.46%"><span class="t">Salesforce commerce</span><span class="s">Modelo Papa Johns</span></div>
+      <div class="sa-num"  style="left:66.33%;top:56.53%">06</div>
+      <div class="sa-item" style="left:73.55%;top:57.30%;width:21.46%"><span class="t">Servicio al cliente</span><span class="s">Modelo Ag&eacute;ntico</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 4 · FORWARD-LOOKING STATEMENTS (fiel a slide2.pptx) ============ -->
+  <section class="slide" id="s2">
+    <div class="fls">
+      <div class="fls-title">Forward-looking statements</div>
+      <div class="fls-card"></div>
+      <div class="fls-body">This presentation contains forward-looking statements about, among other things, trend analyses and statements regarding future events, anticipated growth and industry prospects, and our strategies, expectation or plans regarding product releases and enhancements. The achievement or success of the matters covered by such forward-looking statements involves risks, uncertainties and assumptions. If any such risks or uncertainties materialize or if any of the assumptions prove incorrect, results or outcomes could differ materially from those expressed or implied by these forward-looking statements. The risks and uncertainties referred to above include those factors discussed in Salesforce&rsquo;s reports filed from time to time with the Securities and Exchange Commission, including, but not limited to our ability to consummate the pending acquisition of Informatica on a timely basis or at all; our ability to meet the expectations of our customers; uncertainties regarding AI technologies and their integration into our product offerings; the effect of evolving domestic and foreign government regulations; regulatory developments and regulatory investigations involving us or affecting our industry; our ability to successfully introduce new services and product features, including related to AI and Agentforce; our ability to execute our business plans; the pace of change and innovation and our ability to compete in the markets in which we participate; and our ability to maintain and enhance our brands.</div>
+      <img class="fls-logo" src="Nymbus-MC-Agosto_assets/s2-logo.png" alt="Salesforce">
+    </div>
+  </section>
+
+  <!-- ============ 5 · CONECTAR / SALESFORCE #1 (fiel a slide-conectar.pptx) ============ -->
+  <section class="slide" id="sc">
+    <div class="sc">
+      <!-- logo Salesforce -->
+      <img class="sc-logo" src="Nymbus-MC-Agosto_assets/conectar-sflogo.png" alt="Salesforce">
+      <!-- panel de texto izquierdo -->
+      <div class="sc-eyebrow">Nuestra visi&oacute;n desde 1999</div>
+      <div class="sc-headline">Conectar con los clientes de una manera totalmente nueva</div>
+      <!-- tarjeta central -->
+      <div class="sc-frame">
+        <!-- variantes = imagenes que se van pasando -->
+        <div class="sc-var" style="animation-delay:0s"><img class="sc-cardimg" src="Nymbus-MC-Agosto_assets/conectar-card-crm.png" alt="Salesforce #1 CRM"></div>
+        <div class="sc-var" style="animation-delay:4s"><img class="sc-cardimg" src="Nymbus-MC-Agosto_assets/conectar-card-sales.png" alt="Salesforce #1 Sales"></div>
+        <div class="sc-var" style="animation-delay:8s"><img class="sc-cardimg" src="Nymbus-MC-Agosto_assets/conectar-card-service.png" alt="Salesforce #1 Customer Service"></div>
+        <div class="sc-var" style="animation-delay:12s"><img class="sc-cardimg" src="Nymbus-MC-Agosto_assets/conectar-card-marketing.png" alt="Salesforce #1 Marketing"></div>
+      </div>
+      <!-- indicador del carrusel interno (debajo de la tarjeta) -->
+      <div class="sc-dots">
+        <span class="sc-dot" style="animation-delay:0s"></span>
+        <span class="sc-dot" style="animation-delay:4s"></span>
+        <span class="sc-dot" style="animation-delay:8s"></span>
+        <span class="sc-dot" style="animation-delay:12s"></span>
+      </div>
+      <!-- decoraciones derecha / inferior -->
+      <img class="sc-woman" src="Nymbus-MC-Agosto_assets/conectar-woman.png" alt="">
+      <img class="sc-astro" src="Nymbus-MC-Agosto_assets/conectar-astro.png" alt="">
+      <img class="sc-foliage" src="Nymbus-MC-Agosto_assets/conectar-foliage.png" alt="">
+      <img class="sc-bush" src="Nymbus-MC-Agosto_assets/conectar-bush.png" alt="">
+    </div>
+  </section>
+
+  <!-- ============ 6 · LO QUE ESCUCHAMOS (fiel a slide-loqueescuchamos.pptx) ============ -->
+  <section class="slide" id="sl">
+    <div class="sl">
+      <!-- nubes de fondo (layout) -->
+      <img class="sl-cloud" src="Nymbus-MC-Agosto_assets/escuchamos-cloud.png" alt="" style="left:54%;top:52%;width:46%;height:48%;opacity:.2">
+      <img class="sl-cloud" src="Nymbus-MC-Agosto_assets/escuchamos-cloud.png" alt="" style="left:0;top:74%;width:24%;height:26%;opacity:.2">
+      <img class="sl-cloud" src="Nymbus-MC-Agosto_assets/escuchamos-cloud.png" alt="" style="left:87.55%;top:84.72%;width:12.45%;height:15.28%">
+      <!-- recuadro redondeado (glass) detras de los 2 logos -->
+      <div class="sl-logobox"></div>
+      <!-- logo Salesforce (layout) -->
+      <img class="sl-sflogo" src="Nymbus-MC-Agosto_assets/escuchamos-sf.png" alt="Salesforce">
+      <!-- recuadro glass que enmarca al personaje y el titulo -->
+      <div class="sl-glass"></div>
+      <!-- personaje animado central (Astro) -->
+      <img class="sl-astro" src="Nymbus-MC-Agosto_assets/escuchamos-astro.gif" alt="Astro">
+      <!-- sombra bajo el personaje -->
+      <img class="sl-shadow" src="Nymbus-MC-Agosto_assets/escuchamos-shadow.png" alt="">
+      <!-- titulo -->
+      <div class="sl-title">Lo que escuchamos<br>de Nymbus</div>
+      <!-- planta animada abajo del personaje -->
+      <img class="sl-plant" src="Nymbus-MC-Agosto_assets/escuchamos-plant.gif" alt="">
+      <!-- logo Nymbus -->
+      <img class="sl-nymbus" src="Nymbus-MC-Agosto_assets/escuchamos-nymbus.png" alt="Nymbus">
+    </div>
+  </section>
+
+  <!-- ============ 3 · WHILE CMOs JOBS-TO-BE-DONE (fiel a slide3.pptx) ============ -->
+  <section class="slide" id="s3">
+    <div class="s3">
+      <img class="s3-bg" src="Nymbus-MC-Agosto_assets/s3-bg.png" alt="">
+      <div class="s3-stars" id="s3stars"></div>
+      <img class="s3-logo" src="Nymbus-MC-Agosto_assets/logo-nymbus.png" alt="Nymbus">
+      <div class="s3-title">Estado actual <span class="s3-hl">(Puntos d&eacute;biles)</span></div>
+
+      <div class="s3-chip" style="left:12.16%;animation-delay:0s"><img src="Nymbus-MC-Agosto_assets/s3-ic-magnifier.png" alt=""></div>
+      <div class="s3-chip" style="left:31.08%;animation-delay:.5s"><img src="Nymbus-MC-Agosto_assets/s3-ic-target.png" alt=""></div>
+      <div class="s3-chip" style="left:50.00%;animation-delay:1s"><img src="Nymbus-MC-Agosto_assets/s3-ic-sms.png" alt=""></div>
+      <div class="s3-chip" style="left:68.92%;animation-delay:1.5s"><i class="fa-solid fa-shield-halved" style="font-size:5.4cqh;color:#0250D9"></i></div>
+      <div class="s3-chip" style="left:87.84%;animation-delay:2s"><img src="Nymbus-MC-Agosto_assets/s3-ic-agentforce.png" alt=""></div>
+
+      <div class="s3-card" style="left:4.00%;width:16.32%;animation-delay:.05s">Vista fragmentada del cliente</div>
+      <div class="s3-card" style="left:22.92%;width:16.32%;animation-delay:.55s">Campaign-first, not customer-first</div>
+      <div class="s3-card" style="left:41.84%;width:16.32%;animation-delay:1.05s">Las expectativas en tiempo real no se cumplen</div>
+      <div class="s3-card" style="left:60.76%;width:16.32%;animation-delay:1.55s">Brechas de confianza y cumplimiento</div>
+      <div class="s3-card" style="left:79.68%;width:16.32%;animation-delay:2.05s">Presi&oacute;n operativa en el contact center</div>
+    </div>
+  </section>
+
+  <!-- ============ 4 · ESTADO ACTUAL -> FUTURO (base slide 3 + filas de slide4.pptx) ============ -->
+  <section class="slide" id="s4">
+    <div class="s3">
+      <img class="s3-bg" src="Nymbus-MC-Agosto_assets/s3-bg.png" alt="">
+      <div class="s3-stars" id="s4stars"></div>
+      <img class="s3-logo" src="Nymbus-MC-Agosto_assets/logo-nymbus.png" alt="Nymbus">
+      <div class="s3-title">Estado actual <span class="s3-hl">(Puntos d&eacute;biles)</span></div>
+
+      <div class="s3-chip" style="left:12.16%;animation-delay:0s"><img src="Nymbus-MC-Agosto_assets/s3-ic-magnifier.png" alt=""></div>
+      <div class="s3-chip" style="left:31.08%;animation-delay:.5s"><img src="Nymbus-MC-Agosto_assets/s3-ic-target.png" alt=""></div>
+      <div class="s3-chip" style="left:50.00%;animation-delay:1s"><img src="Nymbus-MC-Agosto_assets/s3-ic-sms.png" alt=""></div>
+      <div class="s3-chip" style="left:68.92%;animation-delay:1.5s"><i class="fa-solid fa-shield-halved" style="font-size:5.4cqh;color:#0250D9"></i></div>
+      <div class="s3-chip" style="left:87.84%;animation-delay:2s"><img src="Nymbus-MC-Agosto_assets/s3-ic-agentforce.png" alt=""></div>
+
+      <div class="s3-card" style="left:4.00%;width:16.32%;animation-delay:.05s">Vista fragmentada del cliente</div>
+      <div class="s3-card" style="left:22.92%;width:16.32%;animation-delay:.55s">Campaign-first, not customer-first</div>
+      <div class="s3-card" style="left:41.84%;width:16.32%;animation-delay:1.05s">Las expectativas en tiempo real no se cumplen</div>
+      <div class="s3-card" style="left:60.76%;width:16.32%;animation-delay:1.55s">Brechas de confianza y cumplimiento</div>
+      <div class="s3-card" style="left:79.68%;width:16.32%;animation-delay:2.05s">Presi&oacute;n operativa en el contact center</div>
+
+      <div class="s4-now" style="left:4.00%;width:16.32%;animation-delay:5s">Datos en silos, accionados por humanos</div>
+      <div class="s4-now" style="left:22.92%;width:16.32%;animation-delay:6.4s">Campa&ntilde;as de una sola v&iacute;a, por reglas</div>
+      <div class="s4-now" style="left:41.84%;width:16.32%;animation-delay:7.8s">Reacci&oacute;n tard&iacute;a, canales desconectados</div>
+      <div class="s4-now" style="left:60.76%;width:16.32%;animation-delay:9.2s">Cumplimiento manual, riesgo de inconsistencia</div>
+      <div class="s4-now" style="left:79.68%;width:16.32%;animation-delay:10.6s">Capacidad limitada, alto costo por contacto</div>
+
+      <img class="s4-arrow" src="Nymbus-MC-Agosto_assets/s4-arrow.png" alt="" style="left:12.16%;animation-delay:5.2s">
+      <img class="s4-arrow" src="Nymbus-MC-Agosto_assets/s4-arrow.png" alt="" style="left:31.08%;animation-delay:6.6s">
+      <img class="s4-arrow" src="Nymbus-MC-Agosto_assets/s4-arrow.png" alt="" style="left:50.00%;animation-delay:8s">
+      <img class="s4-arrow" src="Nymbus-MC-Agosto_assets/s4-arrow.png" alt="" style="left:68.92%;animation-delay:9.4s">
+      <img class="s4-arrow" src="Nymbus-MC-Agosto_assets/s4-arrow.png" alt="" style="left:87.84%;animation-delay:10.8s">
+
+      <div class="s4-future" style="left:4.00%;width:16.32%;animation-delay:5.4s">Data Cloud: perfil unificado 360&deg; (Identity Resolution)</div>
+      <div class="s4-future" style="left:22.92%;width:16.32%;animation-delay:6.8s">Segments + Journey en Flow, contenido con Prompt Builder</div>
+      <div class="s4-future" style="left:41.84%;width:16.32%;animation-delay:8.2s">Journey en tiempo real disparado por evento (Data Cloud)</div>
+      <div class="s4-future" style="left:60.76%;width:16.32%;animation-delay:9.6s">Consent &amp; Preferences + Privacy Center nativos</div>
+      <div class="s4-future" style="left:79.68%;width:16.32%;animation-delay:11s">Agentforce: desv&iacute;a contactos evitables a escala</div>
+    </div>
+  </section>
+
+  <!-- ============ 9 · VIDEO (base del slide 6) ============ -->
+  <section class="slide" id="sv">
+    <div class="sv">
+      <!-- recuadro blanco detras de los 2 logos (branding) -->
+      <div class="sv-logobox"></div>
+      <img class="sv-sflogo" src="Nymbus-MC-Agosto_assets/escuchamos-sf.png" alt="Salesforce">
+      <img class="sv-nymbus" src="Nymbus-MC-Agosto_assets/escuchamos-nymbus.png" alt="Nymbus">
+      <!-- video (sin sonido, autoplay al entrar al slide) -->
+      <video class="sv-video" id="sv-video" src="Nymbus-MC-Agosto_assets/video1.mp4" muted playsinline preload="auto" loop></video>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ NAV / PROGRESS ============ -->
+<div class="progress-wrap">
+  <div class="prog-count"><b id="curNum">1</b> / <span id="totNum">1</span></div>
+  <div class="dots" id="dots"></div>
+</div>
+<div class="footer-brand">NYMBUS × SALESFORCE · MARKETING CLOUD</div>
+<div class="nav">
+  <button id="prevBtn" onclick="go(current-1)"><i class="fa-solid fa-arrow-left"></i></button>
+  <button id="nextBtn" onclick="go(current+1)"><i class="fa-solid fa-arrow-right"></i></button>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let current = 0;
+  document.getElementById('totNum').textContent = total;
+  const dotsWrap = document.getElementById('dots');
+  slides.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='dot'+(i===0?' active':'');
+    d.onclick=()=>go(i);
+    dotsWrap.appendChild(d);
+  });
+  const dots=Array.from(document.querySelectorAll('.dot'));
+  const svVideo=document.getElementById('sv-video');
+  if(svVideo){ svVideo.muted=true; }
+  function go(n){
+    if(n<0||n>=total||n===current) return;
+    slides[current].classList.add('prev');
+    slides[current].classList.remove('active');
+    slides[n].classList.remove('prev');
+    slides[n].classList.add('active');
+    slides.forEach((s,i)=>{ if(i!==current && i!==n) s.classList.remove('prev'); });
+    current=n; update();
+  }
+  function update(){
+    dots.forEach((d,i)=>d.classList.toggle('active',i===current));
+    document.getElementById('curNum').textContent=current+1;
+    document.getElementById('track').style.width=((current+1)/total*100)+'%';
+    document.getElementById('prevBtn').disabled=(current===0);
+    document.getElementById('nextBtn').disabled=(current===total-1);
+    if(svVideo){
+      if(slides[current].id==='sv'){ svVideo.currentTime=0; svVideo.play().catch(function(){}); }
+      else { svVideo.pause(); }
+    }
+  }
+  update();
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(current+1);}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(current-1);}
+    if(e.key==='Home')go(0);
+    if(e.key==='End')go(total-1);
+  });
+  let tx=0;
+  document.addEventListener('touchstart',e=>tx=e.changedTouches[0].clientX,{passive:true});
+  document.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-tx;
+    if(Math.abs(dx)>60){ dx<0?go(current+1):go(current-1); }
+  },{passive:true});
+  let wlock=false;
+  document.addEventListener('wheel',e=>{
+    if(wlock) return;
+    if(Math.abs(e.deltaY)<24 && Math.abs(e.deltaX)<24) return;
+    wlock=true; setTimeout(()=>wlock=false,700);
+    (e.deltaY>0||e.deltaX>0)?go(current+1):go(current-1);
+  },{passive:true});
+
+  // ===== ENTRANCE + CONTINUOUS FLOAT + PARALLAX (single rAF loop) =====
+  const cover=document.getElementById('cover');
+  const rawLayers=Array.from(cover.querySelectorAll('.cl'));
+  const easeOutCubic=p=>1-Math.pow(1-p,3);
+  const easeOutBack=p=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2);};
+  // per-category tuning: delay/dur (ms) for entrance, rise(px) & s0(start scale), pop(overshoot), amp/spd for float
+  const CFG={
+    bg:   {delay:0,   dur:700, rise:14, s0:1.03, pop:false, amp:0, spd:0},
+    text: {delay:640, dur:820, rise:26, s0:1,    pop:false, amp:0, spd:0},
+    robot:{delay:220, dur:920, rise:36, s0:.9,   pop:false, amp:10.35, spd:.55},
+    mag:  {delay:520, dur:720, rise:24, s0:.7,   pop:true,  amp:8.86, spd:.75},
+    star: {delay:560, dur:640, rise:12, s0:.4,   pop:true,  amp:39.55, spd:.9},
+  };
+  const layers=rawLayers.map((el,i)=>{
+    let cat='star';
+    if(el.tagName==='DIV') cat='text';
+    else if(el.classList.contains('cl-robot')) cat='robot';
+    else if(el.classList.contains('cl-mag'))   cat='mag';
+    else if(/cl-(bg|85|86|87|88|79)\b/.test(el.className)) cat='bg';
+    const c=CFG[cat];
+    // stagger stars a bit so they don't pop/float in unison
+    const stagger = cat==='star' ? i*55 : 0;
+    return {el, rot:parseFloat(el.dataset.rot||0), depth:parseFloat(el.dataset.depth||0),
+      delay:c.delay+stagger, dur:c.dur, rise:c.rise, s0:c.s0, pop:c.pop,
+      amp:c.amp, spd:c.spd, ph:i*0.8};
+  });
+  let tPx=0,tPy=0,px=0,py=0;               // pointer target + eased value
+  cover.addEventListener('mousemove',e=>{
+    const r=cover.getBoundingClientRect();
+    tPx=Math.max(-1,Math.min(1,((e.clientX-r.left)/r.width-.5)*2));
+    tPy=Math.max(-1,Math.min(1,((e.clientY-r.top)/r.height-.5)*2));
+  });
+  cover.addEventListener('mouseleave',()=>{tPx=0;tPy=0;});
+  window.addEventListener('deviceorientation',e=>{
+    if(e.gamma==null) return;
+    tPx=Math.max(-1,Math.min(1,e.gamma/30));
+    tPy=Math.max(-1,Math.min(1,(e.beta-45)/30));
+  });
+  const t0=performance.now();
+  function frame(now){
+    const el=now-t0;                        // elapsed ms
+    const t=el/1000;                        // elapsed s (for float sine)
+    px+=(tPx-px)*0.08; py+=(tPy-py)*0.08;   // ease pointer toward target
+    for(const L of layers){
+      const p=Math.max(0,Math.min(1,(el-L.delay)/L.dur));       // entrance progress
+      const e=L.pop?easeOutBack(p):easeOutCubic(p);
+      const op=Math.max(0,Math.min(1,(el-L.delay)/(L.dur*0.55)));
+      const scale=L.s0+(1-L.s0)*e;
+      const rise=L.rise*(1-e);
+      const fY=L.amp?L.amp*Math.sin(t*L.spd+L.ph):0;             // continuous float
+      const fX=L.amp?L.amp*0.4*Math.cos(t*L.spd*0.8+L.ph):0;
+      const dx=-px*L.depth+fX;
+      const dy=-py*L.depth+fY+rise;
+      L.el.style.opacity=op;
+      L.el.style.transform=`translate(${dx}px,${dy}px) rotate(${L.rot}deg) scale(${scale})`;
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // ===== network particles bg =====
+  const cv=document.getElementById('net'), ctx=cv.getContext('2d');
+  let W,H,pts;
+  function resize(){
+    W=cv.width=innerWidth; H=cv.height=innerHeight;
+    const count=Math.min(70,Math.floor(W*H/28000));
+    pts=Array.from({length:count},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35}));
+  }
+  resize(); addEventListener('resize',resize);
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;}
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const a=pts[i],b=pts[j],dx=a.x-b.x,dy=a.y-b.y,dist=Math.hypot(dx,dy);
+      if(dist<130){ctx.strokeStyle='rgba(1,118,211,'+(1-dist/130)*.18+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
+    }
+    for(const p of pts){ctx.fillStyle='rgba(0,161,224,.4)';ctx.beginPath();ctx.arc(p.x,p.y,1.6,0,7);ctx.fill();}
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // ===== estrellitas blancas animadas en slides 3 y 4 =====
+  (function(){
+    ['s3stars','s4stars'].forEach(function(id){
+      const sw=document.getElementById(id);
+      if(!sw) return;
+      const N=48;
+      for(let i=0;i<N;i++){
+        const s=document.createElement('div');
+        s.className='s3-star';
+        const sz=((Math.random()*3+2)*1.5).toFixed(2);
+        s.style.width=s.style.height=sz+'px';
+        s.style.left=(Math.random()*100).toFixed(2)+'%';
+        s.style.top=(Math.random()*100).toFixed(2)+'%';
+        s.style.setProperty('--tw',(2+Math.random()*3).toFixed(2)+'s');
+        s.style.setProperty('--df',((4+Math.random()*4)/1.8).toFixed(2)+'s');
+        s.style.setProperty('--dx',((Math.random()*108)-54).toFixed(1)+'px');
+        s.style.animationDelay=(-Math.random()*5).toFixed(2)+'s,'+(-Math.random()*5).toFixed(2)+'s';
+        sw.appendChild(s);
+      }
+    });
+  })();
+</script>
+</body>
+</html>
