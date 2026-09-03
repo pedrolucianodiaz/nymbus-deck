@@ -213,6 +213,21 @@
   .sl-plant{position:absolute;left:32.48%;top:71.37%;width:33.58%;height:28.82%;z-index:6;object-fit:contain}
   .sl-nymbus{position:absolute;left:85.63%;top:7.31%;width:4.99%;height:5.99%;z-index:7;object-fit:contain}
 
+  /* ============ SLIDE · QUE ES MARKETING CLOUD NEXT (clon de "Lo que escuchamos", SIN recuadro glass ni GIFs) ============ */
+  #sq{padding:0;background:#079AE9}
+  .sq{position:absolute;inset:0;margin:auto;aspect-ratio:16/9;max-width:100%;max-height:100%;
+    container-type:size;overflow:hidden;background:#079AE9}
+  .sq-cloud{position:absolute;z-index:1;object-fit:fill}
+  .sq-sflogo{position:absolute;left:92.60%;top:8.22%;width:3.57%;z-index:1;object-fit:contain}
+  .sq-logobox{position:absolute;left:83.5%;top:5.2%;width:15.6%;height:11.2%;z-index:1;
+    border-radius:3cqh;background:#fff;
+    box-shadow:0 10px 30px rgba(0,40,100,.15)}
+  .sq-title{position:absolute;left:8%;top:38%;width:84%;height:24%;z-index:5;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;
+    font-size:10.12cqh;line-height:1;letter-spacing:-.5px;color:#fff}
+  .sq-nymbus{position:absolute;left:85.63%;top:7.31%;width:4.99%;height:5.99%;z-index:7;object-fit:contain}
+
   /* ============ SLIDE · VIDEO (base del slide 6, sin animaciones/nubes/cuadro) ============ */
   #sv{padding:0;background:#079AE9}
   .sv{position:absolute;inset:0;margin:auto;aspect-ratio:16/9;max-width:100%;max-height:100%;
@@ -403,7 +418,25 @@
     </div>
   </section>
 
-  <!-- ============ 5 · CONECTAR / SALESFORCE #1 (fiel a slide-conectar.pptx) ============ -->
+  <!-- ============ 5 · QUE ES MARKETING CLOUD NEXT (clon de "Lo que escuchamos", SIN recuadro glass ni GIFs) ============ -->
+  <section class="slide" id="sq">
+    <div class="sq">
+      <!-- nubes de fondo (layout, iguales a "Lo que escuchamos") -->
+      <img class="sq-cloud" src="Nymbus-MC-Agosto_assets/escuchamos-cloud.png" alt="" style="left:54%;top:52%;width:46%;height:48%;opacity:.2">
+      <img class="sq-cloud" src="Nymbus-MC-Agosto_assets/escuchamos-cloud.png" alt="" style="left:0;top:74%;width:24%;height:26%;opacity:.2">
+      <img class="sq-cloud" src="Nymbus-MC-Agosto_assets/escuchamos-cloud.png" alt="" style="left:87.55%;top:84.72%;width:12.45%;height:15.28%">
+      <!-- recuadro redondeado (glass) detras de los 2 logos -->
+      <div class="sq-logobox"></div>
+      <!-- logo Salesforce (layout) -->
+      <img class="sq-sflogo" src="Nymbus-MC-Agosto_assets/escuchamos-sf.png" alt="Salesforce">
+      <!-- titulo -->
+      <div class="sq-title">&iquest;Qu&eacute; es<br>Marketing Cloud Next?</div>
+      <!-- logo Nymbus -->
+      <img class="sq-nymbus" src="Nymbus-MC-Agosto_assets/escuchamos-nymbus.png" alt="Nymbus">
+    </div>
+  </section>
+
+  <!-- ============ 6 · CONECTAR / SALESFORCE #1 (fiel a slide-conectar.pptx) ============ -->
   <section class="slide" id="sc">
     <div class="sc">
       <!-- logo Salesforce -->
