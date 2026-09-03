@@ -1,119 +1,105 @@
-# 🎤 "¿Qué es Marketing Cloud Next?" — explicativo de 5 minutos
+# 🎤 "¿Qué es Marketing Cloud Next?" — explicativo del principio
 
-> Para soltar si en el panel te dicen: *"antes de seguir, contame en 5 minutos qué es Marketing Cloud Next"*.
-> Está pensado para gente que **no sabe nada** del producto. Léelo con tu voz.
-> Fuente: material oficial (Trailhead — Marketing Cloud Next Basics) de tu repo de certificación.
+> Para soltar al **arranque** del panel, si te dicen: *"antes de seguir, contanos qué es Marketing Cloud Next"*.
+> Es una **explicación neutral y didáctica del producto** — NO un relato, NO los dolores de Nymbus (eso va más adelante y es exclusivo de ellos).
+> Pensado para una sala mixta: gente que viene de **Braze, Mailchimp, WooWup, emBlue** y gente que **nunca tocó una plataforma de marketing**.
 >
-> **Regla de vocabulario:** el producto siempre se llama **Marketing Cloud Next**. Data 360 y Agentforce se nombran como *piezas que vienen adentro*, nunca como "el producto". No te desvíes a una charla de Data Cloud.
+> **Regla de vocabulario:** el producto siempre se llama **Marketing Cloud Next**. Data 360 y Agentforce se nombran como *piezas que vienen adentro*, nunca como "el producto".
 
 ---
 
-## El speech (≈5 min)
+## El explicativo
 
-**(Arranque — el problema, para que se identifiquen)**
+**(La definición en una frase — arrancá por acá)**
 
-Déjenme empezar por el día a día de cualquier equipo de marketing hoy. Lanzar una campaña es una carrera contra el reloj: ventas la quiere para el viernes, legales todavía revisa el texto, los datos que alimentan la personalización ya están viejos, y la plantilla de mail sigue en revisión de diseño. Mucha presión, muchas herramientas sueltas, todo manual.
+Marketing Cloud Next es **la solución de marketing de Salesforce, construida de forma nativa sobre la misma plataforma donde ya viven Ventas, Servicio y Commerce**. En una frase: es una plataforma para entender al cliente, comunicarte con él en todos los canales, y hacerlo con agentes de IA trabajando adentro.
 
-Y del otro lado, el cliente espera lo contrario: experiencias fluidas y personalizadas. Un dato que me gusta: **uno de cada tres clientes abandona una marca después de una sola mala experiencia**. Y aunque casi todos los marketers ya experimentan con IA, muy pocos logran usar bien sus datos para crear experiencias relevantes. Ahí está la desconexión que Marketing Cloud Next viene a resolver.
+**(Para ubicar a los que ya usaron una plataforma de marketing)**
 
-**(La definición en una frase)**
+Si alguna vez trabajaron con una herramienta de marketing —Braze, Mailchimp, WooWup, emBlue— ya conocen la idea base: una plataforma para armar audiencias, mandar mensajes por varios canales y automatizar campañas. Marketing Cloud Next hace todo eso. Hasta ahí, ningún misterio.
 
-Entonces, ¿qué es? En una frase: **Marketing Cloud Next es la solución de marketing de Salesforce, basada en agentes de IA y construida de forma nativa sobre la plataforma principal de Salesforce.** Eso último es la clave: no es una herramienta al costado, vive en la misma plataforma que Ventas, Servicio y Commerce.
+**(Para los que nunca usaron una)**
 
-**(Qué cambia respecto a lo de antes — el corazón)**
+Y si nunca usaron una: pensá una plataforma de marketing como el lugar donde una empresa **decide a quién le habla, qué le dice, por qué canal y cuándo** — y lo automatiza para no hacerlo a mano cliente por cliente.
 
-Marketing Cloud Next resuelve tres dolores del marketing tradicional:
+**(Los 3 pilares — la estructura para entenderlo)**
 
-1. **Datos difíciles de usar.** Antes, para armar un segmento, marketing dependía de SQL, de Data Extensions, del equipo de IT. Lento. Ahora el marketer trabaja con **datos unificados y accionables**, y puede segmentar y analizar directamente, incluso describiendo la audiencia en **lenguaje natural**, sin escribir una línea de código.
+La forma más fácil de entender qué es Marketing Cloud Next es con **tres pilares**:
 
-2. **Experiencias multicanal difíciles de coordinar.** Antes cada canal y cada área iba por su lado: mail acá, web allá, servicio en otro sistema. Silos. Ahora se orquesta **todo el ciclo de vida del cliente desde un solo lugar**, con journeys que reaccionan a eventos **en tiempo real**.
+- **DATA — entender.** Unifica los datos del cliente para saber realmente quién es y qué necesita.
+- **JOURNEYS — conectar.** Orquesta las experiencias en todos los canales, a lo largo de todo el ciclo de vida del cliente.
+- **AI — automatizar y optimizar.** Agentes de IA que ejecutan tareas, deciden y mejoran las campañas.
 
-3. **Demasiado trabajo manual y herramientas desconectadas.** Antes, un montón de plataformas distintas y procesos a mano. Ahora hay **agentes de IA integrados desde el arranque** que hacen el trabajo pesado.
+Data para entender, Journeys para conectar, AI para automatizar. Esos tres pilares son el 80% de lo que hay que saber.
 
-**(La idea de "marketing basado en agentes")**
+**(El sabor especial — el diferencial, insinuado sin relato)**
 
-Y acá está el cambio más grande, que le da el nombre. En la automatización de siempre, vos configurás manualmente cada paso. Con el **marketing basado en agentes**, vos definís la *estrategia* —por ejemplo, "quiero retener a los clientes en riesgo"— y los agentes de IA se encargan del laburo: arman la audiencia, generan el contenido, personalizan el mensaje, optimizan el rendimiento y coordinan las transiciones entre equipos y canales. Pensálos como colaboradores siempre activos, trabajando atrás de escena. Y siempre con **control humano** donde hace falta: hay acciones que requieren tu aprobación.
+Ahora, la pregunta natural es: *"todo esto ya lo hacían otras plataformas, ¿qué tiene de distinto?"*. Y acá está el sabor propio de Marketing Cloud Next, lo que lo destaca:
 
-**(Los 3 pilares — la parte más fácil de recordar)**
+1. **Es nativo sobre la plataforma principal de Salesforce.** Las otras plataformas de marketing guardan **su propia copia** de los datos del cliente, aparte del resto de la empresa. Marketing Cloud Next no: usa **la misma ficha de cliente** que Ventas, Servicio y Commerce. Una sola fuente de verdad, viva, compartida. No hay que estar sincronizando listas entre sistemas.
 
-Si se quedan con una sola cosa, que sean estos **tres pilares**:
+2. **Está diseñado para marketing basado en agentes de IA.** No es "una plataforma de siempre con un botón de IA pegado encima". Los agentes de IA están integrados desde el arranque: pueden **analizar, recomendar, decidir, ejecutar y optimizar** — siempre dentro de las reglas que define la empresa, y con control humano donde hace falta.
 
-- **DATA — entender.** Unificar los datos para conocer al cliente de verdad.
-- **JOURNEYS — conectar.** Orquestar experiencias en todos los canales, durante todo el ciclo de vida.
-- **AI — automatizar y optimizar.** Agentes de IA que ejecutan tareas, deciden y mejoran las campañas solos.
+Ese es el diferencial: **una sola fuente de verdad del cliente + agentes de IA nativos**. Eso es lo que las herramientas tradicionales no tienen.
 
-**(El cierre — que no lo confundan)**
+**(El cierre)**
 
-Y una aclaración importante para que no se malinterprete: Marketing Cloud Next **no es "el Marketing Cloud de siempre + un poquito de IA"**. Es datos, flujos de trabajo, IA y agentes **integrados en una misma plataforma**. Por eso la IA no solo escribe un mail: puede **analizar, recomendar, decidir, ejecutar y optimizar** — siempre dentro de las reglas que define la empresa.
+Resumido: Marketing Cloud Next combina **datos unificados, automatización multicanal y agentes de IA**, todo sobre la misma plataforma donde ya vive el resto del negocio. Data, Journeys y AI. Eso es qué es.
 
-Y lo mejor para ustedes: **funciona sobre lo que ya tienen de Salesforce**. No es tirar todo y empezar de cero, es el siguiente paso natural.
-
-Así que, resumido en una frase: **Marketing Cloud Next combina datos unificados, automatización multicanal y agentes de IA para entender al cliente, personalizar cada experiencia y optimizar resultados, sin depender todo el tiempo de IT.**
-
-Y por eso, justamente, es que hoy les puedo ayudar con los puntos que venimos hablando. *(→ y enganchás con los puntos débiles / la demo.)*
+*(→ recién a partir de acá enganchás con los casos de Nymbus: sus dolores concretos y cómo los resolvemos.)*
 
 ---
 
 ## 🆘 Chuleta de rescate (si te quedás en blanco)
 
 **Definición (1 frase):**
-> Solución de marketing de Salesforce, **basada en agentes de IA**, construida **nativa** sobre la plataforma principal (misma plataforma que Ventas, Servicio y Commerce).
-
-**Los 3 problemas que resuelve:**
-1. Datos difíciles de usar → **datos unificados y accionables** (sin SQL/IT).
-2. Multicanal descoordinado → **journeys en tiempo real desde un solo lugar**.
-3. Trabajo manual y herramientas sueltas → **agentes de IA integrados**.
+> Solución de marketing de Salesforce, construida **nativa** sobre la misma plataforma que Ventas, Servicio y Commerce, con **agentes de IA** integrados.
 
 **Los 3 pilares (memorizá esto):**
 - **DATA** → entender
 - **JOURNEYS** → conectar
 - **AI** → automatizar y optimizar
 
-**La fórmula mental:**
-> Datos unificados + Segmentación + Journeys multicanal + Personalización + Agentes de IA + Automatización + Optimización
+**El sabor especial (el diferencial, 2 cosas):**
+1. **Una sola fuente de verdad** — misma ficha de cliente que Ventas/Servicio/Commerce, no una copia aparte (esto es lo que Braze/Mailchimp/WooWup/emBlue NO tienen).
+2. **Agentes de IA nativos** — integrados de origen, no pegados encima. La IA puede **analizar → recomendar → decidir → ejecutar → optimizar**.
 
 **La frase que evita la confusión:**
-> No es "Marketing Cloud + IA". Es **datos + workflows + IA + agentes en una sola plataforma**, donde la IA puede **analizar → recomendar → decidir → ejecutar → optimizar**.
-
-**El tranquilizador para el cliente:**
-> Funciona sobre lo que ya tienen de Salesforce. No reemplaza: es el siguiente paso.
+> No es "una plataforma de marketing + IA". Es **datos + workflows + IA + agentes en una sola plataforma**.
 
 ---
 
 ## 🎯 Analogía por si la audiencia es muy no-técnica
 
-> Útil para que un CFO o un CEO "lo agarre" en 20 segundos:
+> Útil para que alguien "lo agarre" en 20 segundos:
 
-*"El Marketing Cloud clásico era un motor de campañas potentísimo, pero guardaba su propia copia de la lista de clientes en un cuarto aparte: había que estar mandándole los datos todo el tiempo. Marketing Cloud Next mudó el marketing al mismo edificio donde ya trabajan ventas y servicio: todos usan una única ficha viva del cliente. Y viene con asistentes de IA que arman la audiencia, escriben el mensaje y lanzan la campaña. El marketer describe en español lo que quiere, y el sistema hace el armado."*
+*"Las plataformas de marketing tradicionales son un motor de campañas potente, pero guardan su propia copia de la lista de clientes en un cuarto aparte: hay que estar mandándoles los datos todo el tiempo. Marketing Cloud Next pone el marketing en el mismo edificio donde ya trabajan ventas y servicio: todos usan una única ficha viva del cliente. Y viene con agentes de IA que ayudan a armar la audiencia, escribir el mensaje y lanzar la campaña."*
 
-Versión de una línea: *"Una sola fuente de verdad del cliente, más un compañero de IA que convierte un pedido en español en una campaña viva y personalizada."*
+Versión de una línea: *"Una sola fuente de verdad del cliente, más agentes de IA que trabajan adentro de la plataforma."*
 
 ---
 
-## 🔧 Diferencia con el Marketing Cloud clásico (si preguntan lo técnico)
+## 🔧 Diferencia con las plataformas conocidas (si preguntan)
 
-El clásico (el de la era ExactTarget, hoy llamado **Marketing Cloud Engagement**) y Marketing Cloud Next se diferencian en 3 cosas de fondo:
+Frente a Braze, Mailchimp, WooWup, emBlue —o el propio Marketing Cloud clásico (era ExactTarget, hoy **Marketing Cloud Engagement**)— la diferencia de fondo es en 3 cosas:
 
-1. **Dónde vive.** El clásico corre en su propia infraestructura, con su propio login, su lenguaje (AMPscript) y sus "Data Extensions". Next vive **sobre la plataforma principal** de Salesforce: mismo modelo de datos, mismos usuarios, misma administración que Ventas y Servicio.
-2. **Los datos.** El clásico dependía de importar/sincronizar listas a su propia base de marketing. Next segmenta **sobre el mismo perfil unificado y en tiempo real** que usa el resto de la empresa (Data 360).
-3. **La IA y los journeys.** En Next los journeys se construyen sobre el motor **Flow** de la plataforma, y la IA generativa / los agentes están **integrados de origen**, no pegados encima.
-
-> **Tranquilizador clave para el cliente:** el Marketing Cloud clásico se sigue vendiendo y soportando. Next **no es una migración forzada** — es el paso siguiente, no "tu herramienta actual se muere".
+1. **Dónde viven los datos.** Las tradicionales importan/sincronizan listas a su propia base de marketing. Marketing Cloud Next segmenta **sobre el mismo perfil unificado y en tiempo real** que usa el resto de la empresa (con Data 360 adentro).
+2. **La IA y los agentes.** En las tradicionales la IA suele ser un agregado. En Marketing Cloud Next la IA generativa y los agentes (Agentforce) están **integrados de origen**.
+3. **La plataforma.** No es una herramienta al costado: es **la misma plataforma** de Ventas, Servicio y Commerce (mismos usuarios, mismo modelo de datos, misma administración).
 
 ---
 
 ## 🛡️ Disponible hoy vs. roadmap (para el slide de Trust / si preguntan)
 
-> Ojo: esto conviene **confirmarlo con tu guía / al momento de la venta**, porque los nombres de ediciones y las fechas cambian seguido. Frase segura para el panel:
+> Ojo: conviene **confirmarlo con tu guía**, porque nombres de ediciones y fechas cambian seguido. Frase segura para el panel:
 
 *"Las ediciones **Growth** y **Advanced** están disponibles hoy, construidas sobre Data 360. Salesforce sigue ampliando las capacidades de IA y agentes; cualquier función a futuro la tratamos como **roadmap** y la confirmamos al momento de la compra."*
-
-- **Razonablemente GA:** Marketing Cloud **Growth** (edición de entrada) y Marketing Cloud **Advanced** (más canales/IA, ej. SMS), ambas sobre Data 360, con contenido generativo y segmentación por lenguaje natural.
-- **Tratar como roadmap / verificar:** fechas exactas, cobertura por canal (WhatsApp, push), y el grado de **autonomía** de los agentes. No cites fechas puntuales sin confirmarlas.
 
 ---
 
 ## Datos duros por si preguntan (del material oficial)
+
+> Estos son útiles **más adelante** (cuando hablás de dolores), no en la definición inicial. Los dejo acá como respaldo:
 
 - 1 de cada 3 clientes abandona una marca tras **una sola** mala experiencia.
 - 69% espera interacciones **consistentes entre departamentos**.
