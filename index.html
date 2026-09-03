@@ -801,6 +801,18 @@
     </div>
   </section>
 
+  <!-- ============ SLIDE 14 · video Agentforce (mismo diseno slide 12, con sonido, sin loop) ============ -->
+  <section class="slide" id="sva">
+    <div class="sv">
+      <!-- recuadro blanco detras de los 2 logos (branding) -->
+      <div class="sv-logobox"></div>
+      <img class="sv-sflogo" src="Nymbus-MC-Agosto_assets/escuchamos-sf.png" alt="Salesforce">
+      <img class="sv-nymbus" src="Nymbus-MC-Agosto_assets/escuchamos-nymbus.png" alt="Nymbus">
+      <!-- video (con sonido, autoplay al entrar al slide, NO repite) -->
+      <video class="sv-video" id="sva-video" src="Nymbus-MC-Agosto_assets/agentforce.mp4" playsinline preload="auto"></video>
+    </div>
+  </section>
+
 </div>
 
 <!-- ============ NAV / PROGRESS ============ -->
@@ -829,6 +841,8 @@
   const dots=Array.from(document.querySelectorAll('.dot'));
   const svVideo=document.getElementById('sv-video');
   if(svVideo){ svVideo.muted=true; }
+  const svaVideo=document.getElementById('sva-video');
+  if(svaVideo){ svaVideo.muted=false; }
   function go(n){
     if(n<0||n>=total||n===current) return;
     slides[current].classList.add('prev');
@@ -847,6 +861,10 @@
     if(svVideo){
       if(slides[current].id==='sv'){ svVideo.currentTime=0; svVideo.play().catch(function(){}); }
       else { svVideo.pause(); }
+    }
+    if(svaVideo){
+      if(slides[current].id==='sva'){ svaVideo.currentTime=0; svaVideo.muted=false; svaVideo.play().catch(function(){}); }
+      else { svaVideo.pause(); }
     }
   }
   update();
